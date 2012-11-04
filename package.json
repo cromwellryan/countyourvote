@@ -9,6 +9,9 @@
   "dependencies": {
     "express": "latest"
   },
+  "devDependencies": {
+    "jasmine-node": "latest"
+  },
   "repository": "",
   "author": "Ryan Cromwell, Sr",
   "license": "BSD"
