@@ -1,18 +1,13 @@
 {
-  "name": "votes",
-  "version": "0.0.0",
-  "description": "ERROR: No README.md file found!",
-  "main": "index.js",
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app"
   },
   "dependencies": {
-    "express": "latest"
-  },
-  "devDependencies": {
-    "jasmine-node": "latest"
-  },
-  "repository": "",
-  "author": "Ryan Cromwell, Sr",
-  "license": "BSD"
+    "express": "3.0.1",
+    "jade": "*",
+    "less-middleware": "*"
+  }
 }
