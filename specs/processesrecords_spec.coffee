@@ -2,12 +2,14 @@ line1 = ',,,CROMWELL,RYAN,,,,R'
 line2 = ',,,FROCK,JEANNINE,,,,D'
 lines = [line1,line2]
 
-p = require '../processesrecords'
+sut = require '../processesrecords'
 
 describe 'processesrecords', ->
-  it 'does that', ->
-    expect(p(lines).length).toBe 2
+  it 'turns lines into an array', ->
+    expect(sut(lines).length).toBe 2
 
-  it 'still does that', ->
-    a = p(lines)[0]
-    expect(a.lastName).toBe 'CROMWELL'
+  it 'turns em into voters', ->
+    names = sut(lines).map (voter) ->
+      voter.lastName
+
+    expect(names).toEqual ['CROMWELL', 'FROCK']
