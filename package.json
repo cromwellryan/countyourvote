@@ -3,15 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app",
-    "test": "jasmine-node --autotest --color --coffee"
+    "start": "node-dev app.coffee",
+    "test": "jasmine-node --autotest --color --coffee --test-dir specs ."
   },
   "dependencies": {
     "express": "3.0.1",
     "jade": "*",
+    "connect-assets": "*",
     "less-middleware": "*"
   },
   "devDependencies": {
-    "jasmine-node": "*"
+    "jasmine-node": "*",
+    "node-dev": "*"
   }
 }
