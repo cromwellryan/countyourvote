@@ -2,7 +2,7 @@ config = require '../config'
 findvoter = require '../findvoter'
 
 exports.index = (req, res) -> 
-  res.render 'index', title: config.appname, app: config.appname
+  res.render 'index', title: config.appname, app: config.appname, resultslimit: config.resultslimit
 
 exports.voters = (req, res) ->
   res.json findvoter.find req.query.q

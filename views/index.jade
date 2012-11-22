@@ -7,12 +7,13 @@ block content
   .row-fluid
     form#search.span6(method="get", action="/")
       h3 Find out if your vote counted
-      input(type="text", id="voter", autofocus, placeholder="Find your voting profile", autocomplete="off")
+      input(type="text", id="voter", autofocus, placeholder="voter name", autocomplete="off")
 
   div
     table.table.table-striped.table-hover
       tbody#voters
 
+    p.muted We limit the results to #{resultslimit}.  If you're looking for more, please narrow your search.
 block scripts
   != js('jquery')
   != js('index')

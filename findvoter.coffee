@@ -1,3 +1,4 @@
+config = require './config'
 allrecords = require './processesrecords'
 fs = require 'fs'
 
@@ -15,6 +16,9 @@ exports.byId = (voterid) ->
 exports.find = (criteria) ->
   part = criteria.toLowerCase()
 
-  all.filter (item) ->
+  results = all.filter (item) ->
     item.lastName.toLowerCase().indexOf(part) > -1
+
+  last = config.resultslimit-1
+  results.slice(0, last)
 
