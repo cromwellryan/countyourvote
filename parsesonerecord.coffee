@@ -1,3 +1,5 @@
+Voter = require './voter'
+
 parties = {
   'C': 'Constitution Party'
   'D': 'Democrat Party'
@@ -10,6 +12,7 @@ parties = {
 }
 
 parts = {
+  id: (pieces) -> pieces[0]
   lastName: (pieces) -> pieces[3]
   firstName: (pieces) -> pieces[4]
   party: (pieces) -> 
@@ -22,7 +25,7 @@ exports = module.exports =
   record: (line) ->
     pieces = line.split ','
 
-    voter = {}
+    voter = new Voter
 
     for prop, extractor of parts
       voter[prop] = extractor(pieces)

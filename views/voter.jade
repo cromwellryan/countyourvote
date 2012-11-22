@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= voter.fullName()
+
+  dl.dl-horizontal
+    dt Registered with
+    dd= voter.party
+
+block scripts
+  != js('jquery')

@@ -9,11 +9,16 @@ class Recipient
 
     _.chain(voters)
       .map (voter) ->
-        li = document.createElement('li')
-        li.innerText = voter.fullName
-        li
-      .each (li) ->
-        target.append li
+        tr = $('<tr>')
+        td = $('<td>')
+        a = $('<a>').text voter.fullName
+        a.attr 'href', '/voter/' + voter.id
+
+        tr.append td
+        td.append a
+        tr
+      .each (el) ->
+        target.append el
 
 $ ->
   $voter = $('#voter')
