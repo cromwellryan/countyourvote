@@ -2,8 +2,11 @@ doctype 5
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    != css('bootstrap')
+    != css('bootstrap-responsive')
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
   body
-    block content
+    .container-fluid
+      block content
 
     block scripts

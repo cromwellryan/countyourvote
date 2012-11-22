@@ -11,6 +11,7 @@
     "jade": "*",
     "connect-assets": "*",
     "less-middleware": "*",
+    "less": "*",
     "coffee-script": "*"
   },
   "devDependencies": {

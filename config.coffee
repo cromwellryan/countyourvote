@@ -1,1 +1,1 @@
-exports.appname = 'OpenVote'
+exports.appname = 'Count Your Vote™'

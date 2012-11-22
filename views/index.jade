@@ -2,12 +2,13 @@ extends layout
 
 block content
   h1= title
-  p #{app} is your spot for voter information available through public sources.  We believe that information being provided by our government and used by political organizations should be just as available to citizens.
-  #search
-    label Voter:
-      input(name="voter", id="voter", autofocus)
+  p.lead #{app} is your spot for voter information available through public sources.  We believe that information being provided by our government and used by political organizations should be just as available to citizens.
 
-  ul#voters
+  h3 Find out if your vote counted
+  form
+    input.input-block-level(type="text", id="voter", autofocus, placeholder="Find your voting profile")
+
+  ul#voters.unstyled
 
 block scripts
   != js('jquery')
