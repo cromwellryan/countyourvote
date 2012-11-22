@@ -4,6 +4,9 @@ findvoter = require '../findvoter'
 exports.index = (req, res) -> 
   res.render 'index', title: config.appname, app: config.appname
 
+exports.voters = (req, res) ->
+  res.json findvoter.find req.query.q
+
 exports.voter = (req, res) ->
   voter = findvoter.byId req.params.voterid
   title = config.appname + " - " + voter.fullName()

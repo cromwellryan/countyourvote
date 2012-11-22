@@ -1,14 +1,14 @@
 Voter = require './voter'
 
 parties = {
-  'C': 'Constitution Party'
-  'D': 'Democrat Party'
-  'E': 'Reform Party'
-  'G': 'Green Party'
-  'L': 'Libertarian Party'
-  'N': 'Natural Law Party'
-  'R': 'Republican Party'
-  'S': 'Socialist Party'
+  'C': 'Constitution'
+  'D': 'Democrat'
+  'E': 'Reform'
+  'G': 'Green'
+  'L': 'Libertarian'
+  'N': 'Natural Law'
+  'R': 'Republican'
+  'S': 'Socialist'
 }
 
 parts = {
@@ -19,6 +19,8 @@ parts = {
     indicator = pieces[9]
 
     parties[indicator]
+  city: (pieces) ->
+    pieces[27]
 }
 
 exports = module.exports =

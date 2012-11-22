@@ -4,8 +4,14 @@ block content
   h1= voter.fullName()
 
   dl.dl-horizontal
-    dt Registered with
+    dt Voter id
+    dd= voter.id
+
+    dt Registered as a
     dd= voter.party
+
+    dt City
+    dd= voter.city
 
 block scripts
   != js('jquery')

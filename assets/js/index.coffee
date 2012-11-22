@@ -10,12 +10,20 @@ class Recipient
     _.chain(voters)
       .map (voter) ->
         tr = $('<tr>')
+
+        # Name
         td = $('<td>')
-        a = $('<a>').text voter.fullName
+        a = $('<a>').text (voter.firstName + " " + voter.lastName)
         a.attr 'href', '/voter/' + voter.id
 
         tr.append td
         td.append a
+
+        # city
+        td = $('<td>')
+        td.text voter.city
+
+        tr.append td
         tr
       .each (el) ->
         target.append el
@@ -27,20 +35,21 @@ $ ->
   recipient = new Recipient $voters
 
   $voter.keyup ->
-    _.throttle( qualifiedfind($voter.val(), recipient), 500)
+    _.debounce( qualifiedfind($voter.val(), recipient), 750)
   
 qualifiedfind = (criteria, recipient) ->
 
-  voters = if criteria.length > 3 then find criteria else []
+  if criteria.length > 3
+    find criteria, (voters) ->
+      recipient.display voters 
+  else []
 
-  recipient.display voters
   
-find = (input) ->
-  _.chain(all)
-  .take(10)
-  .value()
+find = (input, callback) ->
+  $.get ('/voter?q='+input), (data) ->
+    console.log data
+    callback data
 
 contains = (left, right) ->
   left.indexOf(right) != -1
 
-all = [ {fullName: "Ryan Cromwell"}, {fullName: "John Doe"} ]

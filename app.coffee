@@ -22,6 +22,7 @@ app.configure 'development', ->
   app.use express.errorHandler()
 
 app.get '/', routes.index
+app.get '/voter', routes.voters
 app.get '/voter/:voterid', routes.voter
 
 http.createServer(app).listen app.get('port'), -> 

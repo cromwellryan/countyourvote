@@ -5,9 +5,9 @@ block content
   p.lead #{app} is your spot for voter information available through public sources.  We believe that information being provided by our government and used by political organizations should be just as available to citizens.
 
   .row-fluid
-    form.span6
+    form#search.span6(method="get", action="/")
       h3 Find out if your vote counted
-      input(type="text", id="voter", autofocus, placeholder="Find your voting profile")
+      input(type="text", id="voter", autofocus, placeholder="Find your voting profile", autocomplete="off")
 
   div
     table.table.table-striped.table-hover
