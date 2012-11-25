@@ -21,8 +21,8 @@ block content
       th Did you're vote count?
     each record in voter.recentElections
       tr
-        td= 
-          span #{record.election.date}
+        td 
+          span= record.election.date
           span  (#{record.election.type})
         td= record.voted
 
