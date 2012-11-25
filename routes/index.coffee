@@ -10,4 +10,14 @@ exports.voters = (req, res) ->
 exports.voter = (req, res) ->
   voter = findvoter.byId req.params.voterid
   title = config.appname + " - " + voter.fullName()
-  res.render 'voter', {title: title, app: config.appname, voter: voter}
+  votervm = 
+    friendlyName: voter.firstName +  " " + voter.lastName
+    affiliation: voter.party
+    voterid: voter.id
+    city: voter.city
+    recentElections:  voter.votingrecord.concat().reverse((record) -> record.date).slice 0,9
+
+  res.render 'voter', 
+    title: title
+    app: config.appname
+    voter: votervm

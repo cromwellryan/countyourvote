@@ -1,17 +1,30 @@
 extends layout
 
 block content
-  h1= voter.fullName()
+  h2= voter.friendlyName + " did your vote count?"
 
   dl.dl-horizontal
     dt Voter id
-    dd= voter.id
+    dd= voter.voterid
 
     dt Registered as a
-    dd= voter.party
+    dd= voter.affiliation
+      span &nbsp;
 
     dt City
     dd= voter.city
+
+  h3 Your recent voting attendance sheet
+  table.table.table-striped.table-bordered
+    thead
+      th.span3 Election
+      th Did you're vote count?
+    each record in voter.recentElections
+      tr
+        td= 
+          span #{record.election.date}
+          span  (#{record.election.type})
+        td= record.voted
 
 block scripts
   != js('jquery')

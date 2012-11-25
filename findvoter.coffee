@@ -1,11 +1,12 @@
 config = require './config'
-allrecords = require './processesrecords'
+processor = require('./processesrecords')()
 fs = require 'fs'
 
-lines = fs.readFileSync('data/WARREN.TXT').toString().split('\n')
+lines = fs.readFileSync('data/WARREN.TXT').toString().split('\n').map (line) -> line.replace '\r',''
+key = lines[0]
 lines = lines.slice 1, lines.length-1
 
-all = allrecords lines
+all = processor.process lines, key
 
 exports.byId = (voterid) ->
   matches = all.filter (item) ->

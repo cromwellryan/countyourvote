@@ -1,6 +1,7 @@
 Voter = require './voter'
+election = require './election'
 
-parties = {
+parties = 
   'C': 'Constitution'
   'D': 'Democrat'
   'E': 'Reform'
@@ -9,9 +10,9 @@ parties = {
   'N': 'Natural Law'
   'R': 'Republican'
   'S': 'Socialist'
-}
+  '': ''
 
-parts = {
+parts =
   id: (pieces) -> pieces[0]
   lastName: (pieces) -> pieces[3]
   firstName: (pieces) -> pieces[4]
@@ -21,10 +22,34 @@ parts = {
     parties[indicator]
   city: (pieces) ->
     pieces[27]
-}
 
-exports = module.exports =
-  record: (line) ->
+howvoted = (raw, type) ->
+  if type == "PRI" 
+    parties[raw]
+  else
+    if raw == "X" then "Voted" else ""
+
+extractvotingrecord = (pieces, electiondecoders) ->
+  record = electiondecoders.map (electioninfo) ->
+    votestatus = pieces[electioninfo.index]
+
+    election: election(electioninfo.name), voted: howvoted(votestatus, electioninfo.type)
+
+  record
+
+class Parser
+  withkey: (@key) -> 
+    @elections = key.split(',')
+                   .map (piece,index) -> 
+                      key: piece, index: index
+                   .filter (piece) ->
+                      (piece.key.indexOf('PRIMARY') == 0 or
+                       piece.key.indexOf('GENERAL') == 0 or
+                       piece.key.indexOf('SPECIAL') == 0)
+                   .map (piece) -> 
+                      name: piece.key, index:piece.index, type: piece.key[0..2]
+                 
+  record: (line, key) ->
     pieces = line.split ','
 
     voter = new Voter
@@ -32,4 +57,10 @@ exports = module.exports =
     for prop, extractor of parts
       voter[prop] = extractor(pieces)
 
+    if @elections?
+      voter.votingrecord = extractvotingrecord pieces, @elections
+
     voter
+
+exports = module.exports = ->
+  new Parser
