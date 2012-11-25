@@ -29,14 +29,14 @@ class Recipient
         target.append el
 
 $ ->
-  $voter = $('#voter')
+  $voter = $('#q')
   $voters = $('#voters')
 
   recipient = new Recipient $voters
 
   $voter.keyup ->
     _.debounce( qualifiedfind($voter.val(), recipient), 750)
-  
+
 qualifiedfind = (criteria, recipient) ->
 
   if criteria.length > 3
