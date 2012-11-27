@@ -1,9 +1,10 @@
 {
   "name": "application-name",
-  "version": "0.0.1",
+  "version": "0.0.1-2",
   "private": true,
   "scripts": {
-    "start": "node-dev app.coffee",
+    "dev": "node-dev app.coffee",
+    "start": "coffee app.coffee",
     "test": "jasmine-node --autotest --verbose --color --coffee --test-dir specs ."
   },
   "dependencies": {
@@ -17,5 +18,9 @@
   "devDependencies": {
     "jasmine-node": "*",
     "node-dev": "*"
+  },
+  "subdomain": "countyourvote",
+  "engines": {
+    "node": "0.8.x"
   }
 }
