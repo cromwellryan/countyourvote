@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  .row-fluid(style="padding-top: 51px")
+  .row-fluid
     .hero-unit
       .row
         img.pull-right(src="/img/countmyvote_logo_medium.png")
@@ -13,9 +13,12 @@ block content
           | available we wanted to make it accessible to more than those with an IT budget.
 
   .row-fluid
-    h3 Find out if your vote counted
-    form#search(method="get", action="/")
+    .span2
+    .span8.container-narrow
+      h3 Find out if your vote counted
+      form#search(method="get", action="/")
         input(type="text", id="q", name="q", autofocus, placeholder="search (i.e. smith james)", autocomplete="off", class="input-xxlarge")
+    .span2
 
   div
     table.table.table-striped.table-hover

@@ -7,24 +7,21 @@ html
     != css('style')
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
   body
-    .navbar.navbar-inverse.navbar-fixed-top
+    .navbar.navbar-fixed-top
       .navbar-inner
         .container
-          a.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse")
+          a.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse") 
+            img(src='/img/countyourvote_header.png')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.brand(href="#") Count Your Vote!
+          a.brand(href="/") 
+            img(src='/img/countyourvote_logo_header.png') 
+            |  Count Your Vote!
           .nav-collapse.collapse
             .nav
-              li.active
-                a(href="#") Home
-              li
-                a(href="#about") About
-              li
-                a(href="#contact") Contact
 
-    .container-fluid
+    .container-fluid(style="padding-top: 51px")
       block content
 
     block scripts
