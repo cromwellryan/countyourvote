@@ -1,13 +1,20 @@
 extends layout
 
 block content
-  h1= title
-  p.lead #{app} is your spot for voter information available through public sources.  We believe that information being provided by our government and used by political organizations should be just as available to citizens.
+  .row-fluid(style="padding-top: 51px")
+    .hero-unit
+      .row
+        img.pull-right(src="/img/countmyvote_logo_medium.png")
+        h1= title
+        p.lead 
+          | At #{app} we believe transparency requires making information accessible, not just available.  So when we 
+          | found out some voter activity is 
+          a(href="/about") publicly 
+          | available we wanted to make it accessible to more than those with an IT budget.
 
   .row-fluid
-    .centered.span4
-      form#search(method="get", action="/")
-        h3 Find out if your vote counted
+    h3 Find out if your vote counted
+    form#search(method="get", action="/")
         input(type="text", id="q", name="q", autofocus, placeholder="search (i.e. smith james)", autocomplete="off", class="input-xxlarge")
 
   div

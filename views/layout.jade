@@ -7,7 +7,37 @@ html
     != css('style')
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
   body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container
+          a.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse")
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.brand(href="#") Count Your Vote!
+          .nav-collapse.collapse
+            .nav
+              li.active
+                a(href="#") Home
+              li
+                a(href="#about") About
+              li
+                a(href="#contact") Contact
+
     .container-fluid
       block content
 
     block scripts
+    !=js('bootstrap-affix.js')
+    !=js('bootstrap-alert.js')
+    !=js('bootstrap-button.js')
+    !=js('bootstrap-carousel.js')
+    !=js('bootstrap-collapse.js')
+    !=js('bootstrap-dropdown.js')
+    !=js('bootstrap-modal.js')
+    !=js('bootstrap-popover.js')
+    !=js('bootstrap-scrollspy.js')
+    !=js('bootstrap-tab.js')
+    !=js('bootstrap-tooltip.js')
+    !=js('bootstrap-transition.js')
+    !=js('bootstrap-typeahead.js')
