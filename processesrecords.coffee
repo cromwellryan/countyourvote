@@ -1,13 +1,13 @@
 parsesone = require './parsesonerecord'
 
 class Processor
+  constructor: ->
+    @parser = parsesone()
+
   process: (lines,key) ->
-    parser = parsesone()
+    @parser.withkey key
 
-    parser.withkey key
-
-    lines.map (line) ->
-      parser.record line
+    lines.map @parser.record 
 
 exports = module.exports = ->
   new Processor
