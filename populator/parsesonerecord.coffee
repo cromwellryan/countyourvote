@@ -1,5 +1,5 @@
-Voter = require './voter'
-election = require './election'
+Voter = require '../voter'
+election = require '../election'
 
 parties = 
   'C': 'Constitution'

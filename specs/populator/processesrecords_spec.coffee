@@ -3,7 +3,7 @@ line1 = ',,,CROMWELL,RYAN,,,,R'
 line2 = ',,,FROCK,JEANNINE,,,,D'
 lines = [line1,line2]
 
-processesrecords = require '../processesrecords'
+processesrecords = require '../../populator/processesrecords'
 
 describe 'processesrecords', ->
   sut = processesrecords()
