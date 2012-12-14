@@ -1,25 +1,24 @@
-config = require './config'
-processor = require('./processesrecords')()
-fs = require 'fs'
+Voter = require './voter'
 
-lines = fs.readFileSync('data/WARREN.TXT').toString().split('\n').map (line) -> line.replace '\r',''
-key = lines[0]
-lines = lines.slice 1, lines.length-1
+exports.byId = (voterid, callback) ->
+  matches = Voter.findOne {id: voterid}, callback
 
-all = processor.process lines, key
+exports.find = (criteria, callback) ->
+  potential = criteria.split(' ').map (part) ->
+    part = part.toUpperCase()
 
-exports.byId = (voterid) ->
-  matches = all.filter (item) ->
-    item.id == voterid
+    pattern = ".*" + part + ".*"
 
-  if matches.length > 0 then matches[0] else {}
+    new RegExp(pattern)
+  
+  matches = {$in: potential}
 
-exports.find = (criteria) ->
-  part = criteria.toLowerCase()
+  if potential.length == 1 
+    search = { $or: [{lastName: matches}, {firstName: matches}] }
+  else
+    search = { $and: [{lastName: matches}, {firstName: matches}] }
 
-  results = all.filter (item) ->
-    item.lastName.toLowerCase().indexOf(part) > -1
-
-  last = config.resultslimit-1
-  results.slice(0, last)
+  Voter.find search, (err, results) ->
+    console.log err if err?
+    callback(err, results)
 

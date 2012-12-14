@@ -35,7 +35,7 @@ $ ->
   recipient = new Recipient $voters
 
   $voter.keyup ->
-    _.debounce( qualifiedfind($voter.val(), recipient), 750)
+    _.debounce( qualifiedfind($voter.val(), recipient), 1000)
 
 qualifiedfind = (criteria, recipient) ->
 
@@ -47,7 +47,6 @@ qualifiedfind = (criteria, recipient) ->
   
 find = (input, callback) ->
   $.get ('/voter?q='+input), (data) ->
-    console.log data
     callback data
 
 contains = (left, right) ->

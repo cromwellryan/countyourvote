@@ -5,19 +5,22 @@ exports.index = (req, res) ->
   res.render 'index', title: config.appname, app: config.appname, resultslimit: config.resultslimit
 
 exports.voters = (req, res) ->
-  res.json findvoter.find req.query.q
+  findvoter.find req.query.q, (err, results) ->
+    console.log err if err?
+    res.json results
 
 exports.voter = (req, res) ->
-  voter = findvoter.byId req.params.voterid
-  title = config.appname + " - " + voter.fullName()
-  votervm = 
-    friendlyName: voter.firstName +  " " + voter.lastName
-    affiliation: voter.party
-    voterid: voter.id
-    city: voter.city
-    recentElections:  voter.votingrecord.concat().reverse((record) -> record.date).slice 0,9
+  findvoter.byId req.params.voterid, (err, voter) ->
+    console.log err if err?
+    title = config.appname + " - " + voter.fullName()
+    votervm = 
+      friendlyName: voter.firstName +  " " + voter.lastName
+      affiliation: voter.party
+      voterid: voter.id
+      city: voter.city
+      recentElections:  voter.votingrecord.concat().reverse((record) -> record.date).slice 0,9
 
-  res.render 'voter', 
-    title: title
-    app: config.appname
-    voter: votervm
+    res.render 'voter', 
+      title: title
+      app: config.appname
+      voter: votervm
