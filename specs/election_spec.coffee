@@ -27,4 +27,4 @@ describe 'election', ->
       expect( -> election 'GOOFY-01/10/2011' ).toThrow 'Unknown election type'
 
     it 'handles the election date', ->
-      expect( (election 'PRIMARY-03/07/2000').date ).toEqual new Date '03/07/2000'
+      expect( (election 'PRIMARY-03/07/2000').held).toEqual new Date '03/07/2000'

@@ -17,6 +17,6 @@ fromkey = (key) ->
 
   parts = key.split '-'
 
-  { type: (typepart parts), date: (extractdate parts) }
+  { type: (typepart parts), held: (extractdate parts) }
 
 exports = module.exports = fromkey

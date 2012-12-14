@@ -26,13 +26,13 @@ describe 'parses stuff', ->
     expect(parser.record(line3).party).toBe('')
 
   it 'pulls primary election record', ->
-    expect(parser.record(line1).votingrecord[0].election.type).toBe 'Primary' #'03/07/2000'
+    expect(parser.record(line1).votingrecord[0].electiontype).toBe 'Primary' #'03/07/2000'
     expect(parser.record(line1).votingrecord[0].voted).toBe 'Republican'
     expect(parser.record(line2).votingrecord[0].voted).toBe 'Democrat'
-    expect(parser.record(line2).votingrecord[4].election.type).toBe 'Primary' #'PRIMARY-05/07/2002'
+    expect(parser.record(line2).votingrecord[4].electiontype).toBe 'Primary' #'PRIMARY-05/07/2002'
 
   it 'pulls general election records', ->
     voter = parser.record(line1)
-    expect(voter.votingrecord[1].election.type).toBe 'General' #'GENERAL-11/07/2000'
     
+    expect(voter.votingrecord[1].electiontype).toBe 'General' #'GENERAL-11/07/2000'
     expect(voter.votingrecord[1].voted).toBe 'Voted'

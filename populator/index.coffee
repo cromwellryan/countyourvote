@@ -18,4 +18,6 @@ console.log 'processing'
 all = processor.process lines, key
 console.log 'done'
 
+console.log 'populating'
 populator.populate mongodestination, all
+console.log 'done'

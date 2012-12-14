@@ -1,5 +1,5 @@
 Voter = require '../voter'
-election = require '../election'
+parseelection = require '../election'
 
 parties = 
   'C': 'Constitution'
@@ -30,12 +30,17 @@ howvoted = (raw, type) ->
     if raw == "X" then "Voted" else ""
 
 extractvotingrecord = (pieces, electiondecoders) ->
-  record = electiondecoders.map (electioninfo) ->
+  electiondecoders.map (electioninfo) ->
     votestatus = pieces[electioninfo.index]
+    
+    election = parseelection(electioninfo.name)
 
-    election: election(electioninfo.name), voted: howvoted(votestatus, electioninfo.type)
+    {
+      electiontype: election.type,
+      held: election.held,
+      voted: howvoted(votestatus, electioninfo.type)
+    }
 
-  record
 
 class Parser
   withkey: (@key) -> 
@@ -58,7 +63,9 @@ class Parser
       voter[prop] = extractor(pieces)
 
     if @elections?
-      voter.votingrecord = extractvotingrecord pieces, @elections
+      votes = extractvotingrecord pieces, @elections
+
+      voter.votingrecord.push vote for vote in votes
 
     voter
 

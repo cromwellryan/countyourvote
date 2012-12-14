@@ -1,9 +1,10 @@
 mongodestination = require '../../populator/mongodestination'
-Voter = require '../../votermodel'
+Voter = require '../../voter'
 
 describe 'MongoDestination', ->
   beforeEach ->
     Voter.collection.remove()
+
   destination = mongodestination()
   it 'will be pissed without an id', ->
     cont = false
@@ -21,14 +22,18 @@ describe 'MongoDestination', ->
   it 'will save things to Voter db', ->
     lastcount = -1
     isdone = false
-    destination.receive {id: 123, name:'Jimmy John'}, (err,data) ->
-      console.log ('receive err ' + err) if err?
-      isdone = true if err?
+    
+    v = new Voter({id:123})
 
-      Voter.count {id: 123}, (err, count) ->
-        console.log ('count err ' + err) if err?
-        lastcount = count 
-        isdone = true
+    destination.receive v, (err,data) ->
+      if err? 
+        console.log ('receive err ' + err) if err?
+        isdone = true if err?
+      else
+        Voter.count {id: 123}, (err, count) ->
+          console.log ('count err ' + err) if err?
+          lastcount = count 
+          isdone = true
       
     waitsFor -> 
       return isdone
