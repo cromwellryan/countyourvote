@@ -1,7 +1,12 @@
+async = require 'async'
 class Populator 
   populate: (destination, items, callback) ->
-    destination.receive item for item in items
-    callback() if callback?
+
+    series = items.map (item) ->
+      ( (c) ->
+        destination.receive item, c)
+
+    async.series series, callback
 
 exports = module.exports = -> 
   new Populator()

@@ -20,5 +20,6 @@ class FakeDestination
   constructor: ->
     @received = 0
 
-  receive: (voter) ->
+  receive: (voter, callback) ->
     @received++
+    callback()
