@@ -20,10 +20,6 @@ class LineReader
         callback err if err?
 
         _readlines data.toString(), callback
-
-        console.log 'asd'
-
-        
         
 exports = module.exports = (->
   new LineReader)
