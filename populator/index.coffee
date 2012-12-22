@@ -1,23 +1,13 @@
-processor = require('./processesrecords')()
-fs = require 'fs'
-mongodestination = require('./mongodestination')()
-populator = require('./populator')()
+parsesline = require('./parsesonerecord')()
+linereader = require('./linereader')()
 
-console.log 'pulling lines'
-lines = fs
-  .readFileSync('data/WARREN.TXT')
-  .toString()
-  .split('\n')
-  .map (line) -> line.replace '\r',''
+linereader.read "data/WARREN.TXT", (err, line, index) ->
+  parsesline.withkey line if index == 0
 
-key = lines[0]
-lines = lines.slice 1, lines.length - 1
-console.log 'done ' + (lines.length - 1)
+  if index > 0
+    voter = parsesline.record line
 
-console.log 'processing'
-all = processor.process lines, key
-console.log 'done'
+    voter.save (err, voter) ->
+      console.log "Damn it #{err}" if err?
+      console.log "Saved #{voter.id}" unless err?
 
-console.log 'populating'
-populator.populate mongodestination, all
-console.log 'done'

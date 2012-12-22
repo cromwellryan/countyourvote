@@ -54,10 +54,11 @@ class Parser
                    .map (piece) -> 
                       name: piece.key, index:piece.index, type: piece.key[0..2]
                  
-  record: (line, key) ->
+  record: (line) ->
     pieces = line.split ','
 
-    voter = new Voter
+    voter = {}
+    voter.votingrecord = []
 
     for prop, extractor of parts
       voter[prop] = extractor(pieces)
@@ -67,7 +68,7 @@ class Parser
 
       voter.votingrecord.push vote for vote in votes
 
-    voter
+    new Voter voter
 
 exports = module.exports = ->
   new Parser
