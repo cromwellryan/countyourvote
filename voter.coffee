@@ -1,25 +1,14 @@
-mongoose = require 'mongoose'
-voterdb = require './voterdb'
+class Voter
+  votingrecord: []
 
-electionSchema = mongoose.Schema {
-  electiontype: String,
-  held: Date,
-  voted: String 
-}
+  constructor: (init) ->
+    if init?
+      for key, value of init
+        @[key] = value
 
-voterSchema = mongoose.Schema { 
-  id: String,
-  lastName: String,
-  firstName: String,
-  party: String,
-  city: String,
-  votingrecord: [electionSchema]
-}
+  fullName: =>
+    @firstName + ' ' + @lastName
 
-voterSchema.methods.fullName = () ->
-  @firstName + ' ' + @lastName
-
-Voter = voterdb.model 'Voter', voterSchema
-
-exports = module.exports = Voter
+exports = module.exports = (init) ->
+  new Voter(init)
 

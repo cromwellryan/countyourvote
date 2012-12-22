@@ -1,24 +1,21 @@
-Voter = require '../voter'
+voter = require '../voter'
 
 describe 'Voter', ->
   it 'can be created', ->
-    new Voter()
+    voter()
 
   it 'has a full name', ->
-    voter = new Voter({ 
-      firstName: 'Ryan'
-      lastName: 'Cromwell'
-    })
+    voter = voter( firstName: 'Ryan', lastName: 'Cromwell' )
 
     expect(voter.fullName()).toBe 'Ryan Cromwell'
 
   it 'has election results', ->
-    voter = new Voter
+    voter = voter
 
     expect(voter.votingrecord).toBeDefined()
 
   it 'can have election record', ->
-    voter = new Voter
+    voter = voter
 
     voter.votingrecord.push { 
       electiontype: 'asdf',
