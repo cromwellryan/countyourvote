@@ -1,10 +1,10 @@
 class Voter
-  votingrecord: []
 
   constructor: (init) ->
     if init?
       for key, value of init
         @[key] = value
+    @votingrecord = []
 
   fullName: =>
     @firstName + ' ' + @lastName

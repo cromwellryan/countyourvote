@@ -1,5 +1,5 @@
-Voter = require '../voter'
-parseelection = require '../election'
+voter = require '../voter'
+parseelection = require './parseselection'
 
 parties = 
   'C': 'Constitution'
@@ -57,18 +57,17 @@ class Parser
   record: (line) ->
     pieces = line.split ','
 
-    voter = {}
-    voter.votingrecord = []
+    newvoter = voter()
 
     for prop, extractor of parts
-      voter[prop] = extractor(pieces)
+      newvoter[prop] = extractor(pieces)
 
     if @elections?
       votes = extractvotingrecord pieces, @elections
 
-      voter.votingrecord.push vote for vote in votes
+      newvoter.votingrecord.push vote for vote in votes
 
-    new Voter voter
+    newvoter
 
 exports = module.exports = ->
   new Parser

@@ -2,7 +2,7 @@
 #GENERAL-11/07/2000
 #SPECIAL-05/08/2001
 
-election = require '../election'
+election = require '../../populator/parseselection'
 
 describe 'election', ->
   describe 'types', ->
