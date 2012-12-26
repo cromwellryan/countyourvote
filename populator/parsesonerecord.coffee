@@ -43,7 +43,7 @@ extractvotingrecord = (pieces, electiondecoders) ->
 
 
 class Parser
-  withkey: (@key) -> 
+  withkey: (@key) => 
     @elections = key.split(',')
                    .map (piece,index) -> 
                       key: piece, index: index
@@ -54,7 +54,7 @@ class Parser
                    .map (piece) -> 
                       name: piece.key, index:piece.index, type: piece.key[0..2]
                  
-  record: (line) ->
+  record: (line) =>
     pieces = line.split ','
 
     newvoter = voter()
