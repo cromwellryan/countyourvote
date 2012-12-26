@@ -4,4 +4,4 @@ exports = module.exports =
   voterdb:  'mongodb://localhost/countyourvote'
   votercollection:  'voters'
   populator:  
-    batchsize:  2000
+    batchsize:  5000
