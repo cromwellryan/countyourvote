@@ -28,15 +28,33 @@ if not err?
         iterations = Math.ceil (lines.length - 1) / batchsize
         laststop = 0
 
-        for iteration in [1..iterations]
+        batches = for iteration in [1..iterations]
+          do () ->
+            batchnumber = iteration
+            start = laststop+1
+            end = start + batchsize
+            laststop = end
 
-          start = laststop+1
-          end = start + batchsize
-          laststop = end
+            (next) ->
+              console.log "Batch #{batchnumber} (#{start} - #{end})"
+              voters = _.chain(lines[start..end]).map(parsesline.record).value()
 
-          console.log "Batch #{iteration} (#{start} - #{end})"
+              collection.insert voters, (err, result) ->
+                console.log "Problem inserting voters: #{err}" if err?
 
-          voters = _.chain(lines[start..end]).map(parsesline.record).value()
+                next() if next?
+ 
+        atend = () ->
+          db.close (err, result) ->
+            console.log "Closed connection to #{connectionstring}" unless err?
+            console.log "Problems closing connection to #{connectionstring}: #{err}" if err?
 
-          collection.insert voters, (err, result) ->
-            console.log "Problem inserting voters: #{err}" if err?
+        compose = (f, g) ->
+          () -> f(g)
+
+        composed = atend 
+        for batch in batches.reverse()
+          composed = compose(batch, composed)
+
+        composed()
+
