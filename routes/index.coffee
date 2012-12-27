@@ -12,7 +12,7 @@ exports.voters = (req, res) ->
 exports.voter = (req, res) ->
   findvoter.byId req.params.voterid, (err, voter) ->
     console.log err if err?
-    title = config.appname + " - " + voter.fullName()
+    title = "#{config.appname} - #{voter.lastName}"
     votervm = 
       friendlyName: voter.firstName +  " " + voter.lastName
       affiliation: voter.party

@@ -2,7 +2,18 @@ MongoClient = require('mongodb').MongoClient
 config = require '../config'
 
 exports.byId = (voterid, callback) ->
-  callback null, null
+  MongoClient.connect config.voterdb, (err, db) ->
+    if err?
+      callback err
+      return
+
+    db.collection config.votercollection, (err, collection) ->
+      if err?
+        console.log search
+        callback err
+        return
+
+      collection.findOne({id: voterid}, callback)
 
 exports.find = (criteria, callback) ->
   potential = criteria.split(' ').map (part) ->

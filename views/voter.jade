@@ -22,8 +22,8 @@ block content
     each record in voter.recentElections
       tr
         td 
-          span= record.election.date
-          span  (#{record.election.type})
+          span= record.held
+          span  (#{record.type})
         td= record.voted
 
 block scripts
