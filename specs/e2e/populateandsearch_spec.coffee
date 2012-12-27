@@ -2,7 +2,7 @@ populator = require('../../populator')()
 findvoter = require '../../findvoter'
 config = require '../../config'
 
-describe 'e2e', ->
+describe 'end 2 end', ->
 
   it 'scenario 1', ->
     cont = false
