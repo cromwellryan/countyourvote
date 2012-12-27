@@ -13,7 +13,7 @@ class Recipient
 
         # Name
         td = $('<td>')
-        a = $('<a>').text (voter.firstName + " " + voter.lastName)
+        a = $('<a>').text (voter.lastName + ", " + voter.firstName)
         a.attr 'href', '/voter/' + voter.id
 
         tr.append td
