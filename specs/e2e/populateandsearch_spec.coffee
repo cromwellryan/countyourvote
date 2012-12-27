@@ -4,20 +4,32 @@ config = require '../../config'
 
 describe 'end 2 end', ->
 
-  it 'scenario 1', ->
-    cont = false
+  beforeEach ->
+    done = false
 
     populator.populatewith "#{__dirname}/scenarios/scenario1.txt", (err, results)->
       console.log err if err?
-      cont = true
+      done = true
 
-    waitsFor -> cont
+    waitsFor -> 
+      done
 
+  it 'can search for people imported', ->
     runs ->
       findvoter.find "Cromwell", (err, results) ->
         console.log err if err?
         expect(results.length).toBe(1)
         expect(results[0].lastName).toBe("CROMWELL")
+
+  it 'will limit results', ->
+    previously = config.resultslimit
+    config.resultslimit = 2
+
+    runs ->
+      findvoter.find " ", (err, results) ->
+        console.log err if err?
+        expect(results.length).toBe(2)
+        config.resultslimit = previously
 
   afterEach ->
     done = false
@@ -30,4 +42,5 @@ describe 'end 2 end', ->
         collection.remove (err, result) ->
           done = true
 
-    waitsFor -> done
+    waitsFor -> 
+      done

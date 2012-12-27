@@ -41,4 +41,4 @@ exports.find = (criteria, callback) ->
         callback err
         return
 
-      collection.find(search).toArray callback
+      collection.find(search).limit(config.resultslimit).toArray callback

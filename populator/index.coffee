@@ -40,7 +40,7 @@ class Populator
               (next) ->
                 voters = _.chain(lines[start..end]).map(parsesline.record).value()
 
-                collection.insert voters, (err, result) ->
+                collection.insert voters, {safe: true}, (err, result) ->
                   console.log "Problem inserting batch: #{err}" if err?
                   next() if next?
    
