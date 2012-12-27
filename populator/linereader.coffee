@@ -8,7 +8,7 @@ class LineReader
     data = data.replace "\r", ""
     lines = data.split "\n"
 
-    callback noerr, lines
+    callback noerr, lines[0...lines.length-1]
 
   read: (file, callback) ->
     fs.exists file, (exists) ->
