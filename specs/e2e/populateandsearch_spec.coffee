@@ -1,6 +1,7 @@
 populator = require('../../populator')()
 findvoter = require '../../findvoter'
 config = require '../../config'
+withcollection = require '../../querycollection'
 
 describe 'end 2 end', ->
 
@@ -34,13 +35,11 @@ describe 'end 2 end', ->
   afterEach ->
     done = false
 
-    MongoClient = require('mongodb').MongoClient
-    MongoClient.connect config.voterdb, (err, db) ->
-      console.log err if err?
-      db.collection config.votercollection, (err, collection) ->
+    withcollection.use config.voterdb, config.votercollection, (collection, finished) ->
+      collection.remove (err, result) ->
         console.log err if err?
-        collection.remove (err, result) ->
-          done = true
+        finished()
+        done = true
 
     waitsFor -> 
       done

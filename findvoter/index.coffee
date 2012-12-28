@@ -1,27 +1,18 @@
-MongoClient = require('mongodb').MongoClient
 config = require '../config'
+withcollection = require '../withcollection'
 
 exports.byId = (voterid, callback) ->
-  MongoClient.connect config.voterdb, (err, db) ->
-    if err?
-      callback err
-      return
-
-    db.collection config.votercollection, (err, collection) ->
-      if err?
-        console.log search
-        callback err
-        return
-
-      collection.findOne({id: voterid}, callback)
+  withcollection.use config.voterdb, config.votercollection, (collection, finished) ->
+    collection.findOne {id: voterid}, (err, results) ->
+      callback err, results
+      finished()
 
 exports.find = (criteria, callback) ->
+
   potential = criteria.split(' ').map (part) ->
     part = part.toUpperCase()
 
-    pattern = ".*" + part + ".*"
-
-    new RegExp(pattern)
+    new RegExp("^#{part}")
   
   matches = {$in: potential}
 
@@ -30,15 +21,7 @@ exports.find = (criteria, callback) ->
   else
     search = { $and: [{lastName: matches}, {firstName: matches}] }
 
-  MongoClient.connect config.voterdb, (err, db) ->
-    if err?
-      callback err
-      return
-
-    db.collection config.votercollection, (err, collection) ->
-      if err?
-        console.log search
-        callback err
-        return
-
-      collection.find(search).limit(config.resultslimit).toArray callback
+  withcollection.use config.voterdb, config.votercollection, (collection, finished) ->
+    collection.find(search).limit(config.resultslimit).toArray (err, results) ->
+      callback err, results
+      finished()
