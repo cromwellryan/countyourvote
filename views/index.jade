@@ -18,13 +18,13 @@ block content
       h3 Find out if your vote counted
       form#search(method="get", action="/")
         input(type="text", id="q", name="q", autofocus, placeholder="search (i.e. smith james)", autocomplete="off", class="input-xxlarge")
+        p.muted We only show the first #{resultslimit} results.  If you're looking for more, please narrow your search.
     .span2
 
   div
     table.table.table-striped.table-hover
       tbody#voters
 
-    p.muted We limit the results to #{resultslimit}.  If you're looking for more, please narrow your search.
 block scripts
   != js('jquery')
   != js('index')
