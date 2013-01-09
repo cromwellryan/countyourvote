@@ -27,8 +27,7 @@ environments =
   test: test
   dev: dev
 
-nodeEnv = process.env.NODE_ENV
-environment = nodeEnv.toLowerCase() if nodeEnv?
+environment = (process.env.NODE_ENV || "dev").toLowerCase()
 
 activeConfig = environments[environment]
 
