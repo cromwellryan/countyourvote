@@ -42,7 +42,8 @@ qualifiedfind = (criteria, recipient) ->
   if criteria.length > 3
     find criteria, (voters) ->
       recipient.display voters 
-  else []
+  else 
+    recipient.display []
 
   
 find = (input, callback) ->
