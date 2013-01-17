@@ -1,7 +1,7 @@
 populator = require('../../populator')()
 findvoter = require '../../findvoter'
 config = require '../../config'
-withcollection = require '../../querycollection'
+withcollection = require '../../withcollection'
 
 describe 'end 2 end', ->
 
